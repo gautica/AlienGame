@@ -55,21 +55,23 @@ public:
     unsigned int getWidth();
     unsigned int getHeight();
     unsigned int getCount();
-    void printMap();
+    Alien* getAlien(const Point &pos);
+    Alien* getAliens();
+    Player& getPlayer();
+    friend std::ostream& operator<<(std::ostream &out, Map &map);
+    //void printMap();
 
 private:
     void placeCharacter() {
         Point pos;
-
         generatePos(pos);
         player.setPos(pos);
-        map[pos.getY()][pos.getX()] = player.getSym();
         for (unsigned int i = 0; i < COUNT; i++) {
             generatePos(pos);
             aliens[i].setPos(pos);
-            map[pos.getY()][pos.getX()] = aliens[i].getSym();
         }
     }
+
     void generatePos(Point &pos) {
         srand(time(0));
         unsigned int x = rand() % (WIDTH - 2) + 1;
@@ -81,6 +83,13 @@ private:
         pos.setX(x);
         pos.setY(y);
         isOccupied[y][x] = true;
+    }
+
+    void refresh() {
+        map[player.getPos().getY()][player.getPos().getX()] = player.getSym();
+        for (unsigned int i = 0; i < COUNT; i++) {
+            map[aliens[i].getPos().getY()][aliens[i].getPos().getX()] = aliens[i].getSym();
+        }
     }
 };
 #endif

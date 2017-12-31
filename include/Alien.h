@@ -3,10 +3,12 @@
 
 #include "Point.h"
 #include "Character.h"
+#include "Player.h"
 
 class Alien : public Character {
 public:
     Alien() : Character('A') {}
     Alien(Point pos) : Character('A', pos) {}
+    int createDamage(Player& player);
 };
 #endif

@@ -9,13 +9,13 @@ public:
     Point pos;
 public:
     Character(char Sym) : Sym(Sym) {};
-    Character(Point position) : Sym(' '), pos(position) {}
-    Character(char Sym, Point position) : Sym(Sym), pos(position) {}
+    Character(Point &position) : Sym(' '), pos(position) {}
+    Character(char Sym, Point &position) : Sym(Sym), pos(position) {}
     virtual ~Character() {}
 
     char getSym();
     void setSym(char Sym);
-    Point getPos();
-    void setPos(Point position);
+    Point& getPos();
+    void setPos(Point &position);
 };
 #endif
