@@ -10,6 +10,6 @@ public:
 
     }
     void fight(Map &map, const Point &pos);
-    bool isEnd();
+    bool isEnd(Map &map);
 };
 #endif

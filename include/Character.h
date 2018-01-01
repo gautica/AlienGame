@@ -4,18 +4,22 @@
 #include "Point.h"
 
 class Character {
-public:
+protected:
     char Sym;
+    unsigned int HP;
     Point pos;
+
 public:
-    Character(char Sym) : Sym(Sym) {};
-    Character(Point &position) : Sym(' '), pos(position) {}
-    Character(char Sym, Point &position) : Sym(Sym), pos(position) {}
+    Character(char Sym, unsigned int hp) : Sym(Sym), HP(hp) {};
+    //Character(Point &position) : Sym(' '), pos(position) {}
+    Character(char Sym, unsigned int hp, Point &position) : Sym(Sym), HP(hp), pos(position) {}
     virtual ~Character() {}
 
     char getSym();
     void setSym(char Sym);
     Point& getPos();
     void setPos(Point &position);
+    int getHP();
+    void setHP(int hp);
 };
 #endif

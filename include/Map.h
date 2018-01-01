@@ -55,6 +55,9 @@ public:
     unsigned int getWidth();
     unsigned int getHeight();
     unsigned int getCount();
+    bool getOccupition(int x, int y);
+    void setOccupition(int x, int y, bool Occupition);
+    bool isWalkable(int x, int y);
     Alien* getAlien(const Point &pos);
     Alien* getAliens();
     Player& getPlayer();
@@ -86,7 +89,6 @@ private:
     }
 
     void refresh() {
-        map[player.getPos().getY()][player.getPos().getX()] = player.getSym();
         for (unsigned int i = 0; i < COUNT; i++) {
             map[aliens[i].getPos().getY()][aliens[i].getPos().getX()] = aliens[i].getSym();
         }

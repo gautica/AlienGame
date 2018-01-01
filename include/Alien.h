@@ -7,8 +7,8 @@
 
 class Alien : public Character {
 public:
-    Alien() : Character('A') {}
-    Alien(Point pos) : Character('A', pos) {}
-    int createDamage(Player& player);
+    Alien() : Character('A', 1) {}
+    Alien(Point pos) : Character('A', 1, pos) {}
+    void createDamage(Player& player);
 };
 #endif

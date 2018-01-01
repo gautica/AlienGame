@@ -5,12 +5,10 @@
 #include "Character.h"
 
 class Player : public Character {
-private:
-    int HP;
 public:
-    Player() : Character('P'), HP(5) {}
-    Player(Point pos) : Character('P', pos), HP(5) {}
-    int getHP();
-    void setHP(int hp);
+    Player() : Character('P', 5) {}
+    Player(Point pos) : Character('P', 5, pos) {}
+    void createDamage(Character* chara);
+    void walk(int x, int y);
 };
 #endif

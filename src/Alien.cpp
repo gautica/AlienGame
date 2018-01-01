@@ -1,13 +1,15 @@
 #include <stdlib.h>
 #include "Alien.h"
 
-int Alien::createDamage(Player &player) {
-    unsigned int distance = abs(pos.getX() - player.pos.getX()) + abs(pos.getY() - player.pos.getY());
-    srand(time(0));
+void Alien::createDamage(Player &player) {
+    if (HP <= 0) {
+        return;
+    }
+    unsigned int distance = abs(pos.getX() - player.getPos().getX()) + abs(pos.getY() - player.getPos().getY());
     int random = rand() % 10 * distance;
     if (random > 10) {
-        return 1;
+        player.setHP(player.getHP() - 1);
     } else {
-        return 0;
+        std::cout << "alien" << getPos() << "hat player verfehlt" << '\n';
     }
 }

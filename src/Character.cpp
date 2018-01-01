@@ -14,3 +14,11 @@ void Character::setSym(char Sym) {
 void Character::setPos(Point &position) {
     this->pos = position;
 }
+
+int Character::getHP() {
+    return HP;
+}
+
+void Character::setHP(int hp) {
+    HP = hp;
+}

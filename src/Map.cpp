@@ -6,7 +6,7 @@ Alien* Map::getAlien(const Point &pos) {
         return nullptr;
     }
     for (unsigned int i = 0; i < COUNT; i++) {
-        if (aliens[i].pos == pos) {
+        if (aliens[i].getPos() == pos) {
             return &aliens[i];
         }
     }
@@ -25,6 +25,18 @@ unsigned int Map::getCount() {
     return COUNT;
 }
 
+bool Map::getOccupition(int x, int y) {
+    return isOccupied[y][x];
+}
+
+void Map::setOccupition(int x, int y, bool Occupition) {
+    isOccupied[y][x] = Occupition;
+}
+
+bool Map::isWalkable(int x, int y) {
+    return !getOccupition(player.getPos().getX() + x, player.getPos().getY() + y);
+}
+
 Alien* Map::getAliens() {
     return aliens;
 }
@@ -32,11 +44,16 @@ Alien* Map::getAliens() {
 Player& Map::getPlayer() {
     return player;
 }
+
 std::ostream& operator<<(std::ostream& out, Map &map) {
     map.refresh();
     for (unsigned int y = 0; y < map.HEIGHT; y++) {
         for (unsigned int x = 0; x < map.WIDTH; x++) {
-            out << map.map[y][x];
+            if (Point(x, y) == map.getPlayer().getPos()) {
+                out << 'P';
+            } else {
+                out << map.map[y][x];
+            }
         }
         out << '\n';
     }

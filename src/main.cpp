@@ -1,9 +1,10 @@
 #include <iostream>
 #include <cstdlib>
 #include "Map.h"
-#include "Battle.h"
+#include "PlayerMapInteraction.h"
 
 void print_usage();
+
 int main(int args, const char** argv) {
     if (args != 4) {
         print_usage();
@@ -12,8 +13,11 @@ int main(int args, const char** argv) {
     unsigned int height = atoi(argv[2]);
     unsigned int count = atoi(argv[3]);
     Map map(width, height, count);
+    PlayerMapInteraction interact;
+    interact.start(map);
+    /**
     Battle battle;
-    while (1) {
+    while (!battle.isEnd(map)) {
         std::cout << map << '\n';
         std::cout << "player's hp is: " << map.getPlayer().getHP() << '\n';
         std::cout << "input x coordinate" << '\n';
@@ -24,6 +28,8 @@ int main(int args, const char** argv) {
         std::cin >> y;
         battle.fight(map, Point(x, y));
     }
+    */
+    std::cout << map;
     return 0;
 }
 
