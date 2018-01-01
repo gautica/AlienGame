@@ -1,4 +1,5 @@
 #include <string>
+#include <exception>
 #include "PlayerMapInteraction.h"
 
 void PlayerMapInteraction::start(Map &map) {
@@ -81,5 +82,9 @@ void PlayerMapInteraction::inModeFight(Map &map) {
         mode = Mode::WALK;
         return;
     }
-    battle.fight(map, Point(stoi(x), stoi(y)));
+    try {
+        battle.fight(map, Point(stoi(x), stoi(y)));
+    } catch (std::exception &ex) {
+        std::cout << ex.what() << "invalid input" << '\n';
+    }
 }
