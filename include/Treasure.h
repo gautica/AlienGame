@@ -1,6 +1,8 @@
 #ifndef TREASURE_H
 #define TREASURE_H
 
+#include <cstdlib>
+#include <ctime>
 #include "Tile.h"
 
 enum Item {Wood = 1, Gold = 3, Diamand = 5};
@@ -9,7 +11,9 @@ class Treasure : public Tile {
 private:
     Item item;
 public:
-    Treasure(int luckyNum) : Tile('T') {
+    Treasure() : Tile('T') {
+        srand(time(0));
+        int luckyNum = rand() % 3;
         switch (luckyNum) {
             case 0:
                 item = Wood;

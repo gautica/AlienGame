@@ -8,8 +8,8 @@
 #include "Player.h"
 #include "Character.h"
 #include "Point.h"
-#include "Tile.h"
 #include "Wall.h"
+#include "Treasure.h"
 
 class Map {
 private:
@@ -20,6 +20,7 @@ private:
     Alien* aliens;
     Player player;
     Tile** map;
+    Treasure treasure[2];
 public:
     Map(unsigned int width, unsigned int height, unsigned int count)
         :WIDTH(width), HEIGHT(height), COUNT(count)
@@ -42,7 +43,6 @@ public:
         }
         // creating aliens
         aliens = new Alien[COUNT];
-        //std::cout << player.getSym() << std::endl;
         placeCharacter();
     }
 
@@ -75,6 +75,12 @@ private:
             generatePos(pos);
             aliens[i].setPos(pos);
         }
+        // placing treasure
+        for (unsigned int i = 0; i < sizeof(treasure) / sizeof(Treasure); i++) {
+            generatePos(pos);
+            map[pos.getY()][pos.getX()] = treasure[i];
+        }
+
     }
 
     void generatePos(Point &pos) {
