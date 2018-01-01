@@ -15,20 +15,6 @@ int main(int args, const char** argv) {
     Map map(width, height, count);
     PlayerMapInteraction interact;
     interact.start(map);
-    /**
-    Battle battle;
-    while (!battle.isEnd(map)) {
-        std::cout << map << '\n';
-        std::cout << "player's hp is: " << map.getPlayer().getHP() << '\n';
-        std::cout << "input x coordinate" << '\n';
-        int x;
-        std::cin >> x;
-        std::cout << "input y coordinate" << '\n';
-        int y;
-        std::cin >> y;
-        battle.fight(map, Point(x, y));
-    }
-    */
     std::cout << map;
     return 0;
 }

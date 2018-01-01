@@ -2,9 +2,6 @@
 #include "Map.h"
 
 Alien* Map::getAlien(const Point &pos) {
-    if (map[pos.getY()][pos.getX()] != 'A') {
-        return nullptr;
-    }
     for (unsigned int i = 0; i < COUNT; i++) {
         if (aliens[i].getPos() == pos) {
             return &aliens[i];
@@ -46,16 +43,28 @@ Player& Map::getPlayer() {
 }
 
 std::ostream& operator<<(std::ostream& out, Map &map) {
-    map.refresh();
+    //map.refresh();
+    char** str = new char*[map.HEIGHT];
+    for (unsigned int y = 0; y < map.HEIGHT; y++) {
+        str[y] = new char[map.WIDTH];
+        for (unsigned int x = 0; x < map.WIDTH; x++) {
+            str[y][x] = map.map[y][x].getSym();
+        }
+    }
+    str[map.player.getPos().getY()][map.player.getPos().getX()] = map.player.getSym();
+    for (unsigned int i = 0; i < map.COUNT; i++) {
+        str[map.aliens[i].getPos().getY()][map.aliens[i].getPos().getX()] = map.aliens[i].getSym();
+    }
+
     for (unsigned int y = 0; y < map.HEIGHT; y++) {
         for (unsigned int x = 0; x < map.WIDTH; x++) {
-            if (Point(x, y) == map.getPlayer().getPos()) {
-                out << 'P';
-            } else {
-                out << map.map[y][x];
-            }
+            out << str[y][x];
         }
         out << '\n';
     }
+    for (unsigned int y = 0; y < map.HEIGHT; y++) {
+        delete[] str[y];
+    }
+    delete[] str;
     return out;
 }

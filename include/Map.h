@@ -8,6 +8,8 @@
 #include "Player.h"
 #include "Character.h"
 #include "Point.h"
+#include "Tile.h"
+#include "Wall.h"
 
 class Map {
 private:
@@ -17,23 +19,23 @@ private:
     bool** isOccupied;
     Alien* aliens;
     Player player;
-    char** map;
+    Tile** map;
 public:
     Map(unsigned int width, unsigned int height, unsigned int count)
         :WIDTH(width), HEIGHT(height), COUNT(count)
     {
-        map = new char*[HEIGHT];
+        map = new Tile*[HEIGHT];
         isOccupied = new bool*[HEIGHT];
         for (unsigned int y = 0; y < HEIGHT; y++) {
-            map[y] = new char[WIDTH];
+            map[y] = new Tile[WIDTH];
             isOccupied[y] = new bool[WIDTH];
             for (unsigned int x = 0; x < WIDTH; x++) {
                 if (y == 0 || y == HEIGHT - 1 ||
                     x == 0 || x == WIDTH - 1) {
-                    map[y][x] = '#';
+                    map[y][x] = Wall();
                     isOccupied[y][x] = true;
                 } else {
-                    map[y][x] = ' ';
+                    //map[y][x] = new Title;
                     isOccupied[y][x] = false;
                 }
             }
@@ -87,11 +89,12 @@ private:
         pos.setY(y);
         isOccupied[y][x] = true;
     }
-
+/**
     void refresh() {
         for (unsigned int i = 0; i < COUNT; i++) {
             map[aliens[i].getPos().getY()][aliens[i].getPos().getX()] = aliens[i].getSym();
         }
     }
+    */
 };
 #endif
