@@ -31,6 +31,14 @@ void Map::setOccupition(int x, int y, bool Occupition) {
 }
 
 bool Map::isWalkable(int x, int y) {
+    // do something when Treasure appears
+    for (unsigned int i = 0; i < sizeof(treasure) / sizeof(Treasure); i++) {
+        if (treasure[i].getPos() == Point(player.getPos().getX() + x, player.getPos().getY() + y)) {
+            player.getList().append(treasure[i]);
+            treasure[i].setItem(None);
+            isOccupied[player.getPos().getY() + y][player.getPos().getX() + x] = false;
+        }
+    }
     return !getOccupition(player.getPos().getX() + x, player.getPos().getY() + y);
 }
 
@@ -54,6 +62,11 @@ std::ostream& operator<<(std::ostream& out, Map &map) {
     str[map.player.getPos().getY()][map.player.getPos().getX()] = map.player.getSym();
     for (unsigned int i = 0; i < map.COUNT; i++) {
         str[map.aliens[i].getPos().getY()][map.aliens[i].getPos().getX()] = map.aliens[i].getSym();
+    }
+    for (unsigned int i = 0; i < sizeof(map.treasure) / sizeof(Treasure); i++) {
+        if (map.treasure[i].getItem() != None) {
+            str[map.treasure[i].getPos().getY()][map.treasure[i].getPos().getX()] = map.treasure[i].getSym();
+        }
     }
 
     for (unsigned int y = 0; y < map.HEIGHT; y++) {

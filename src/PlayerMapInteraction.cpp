@@ -19,6 +19,7 @@ void PlayerMapInteraction::start(Map &map) {
 }
 
 void PlayerMapInteraction::inModeWalk(Map &map) {
+    map.getPlayer().printTreasure();
     std::cout << "in Mode Walk" << '\n';
     std::cout << "input a/A, d/D, s/S, w/W to walk and # to change mode" << '\n';
     char in;

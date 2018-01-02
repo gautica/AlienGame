@@ -3,32 +3,24 @@
 
 #include <cstdlib>
 #include <ctime>
-#include "Tile.h"
+#include "Point.h"
 
-enum Item {Wood = 1, Gold = 3, Diamand = 5};
+enum Item {Wood = 1, Gold = 3, Diamand = 5, None = 0};
 
-class Treasure : public Tile {
+class Treasure {
 private:
+    char Sym = 'T';
+    Point pos;
     Item item;
 public:
-    Treasure() : Tile('T') {
-        srand(time(0));
-        int luckyNum = rand() % 3;
-        switch (luckyNum) {
-            case 0:
-                item = Wood;
-                break;
-            case 1:
-                item = Gold;
-                break;
-            case 2:
-                item = Diamand;
-                break;
-            default:
-                break;
-        }
-    }
+    Treasure() {}
 
+    char getSym() const;
+    Point& getPos();
+    void setPos(Point pos);
     Item getItem();
+    void setItem(Item item);
+    void createItem(int luckyNum);
+    friend std::ostream& operator<<(std::ostream &out, Treasure &treasure);
 };
 #endif

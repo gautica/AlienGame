@@ -25,10 +25,11 @@ public:
     //template <typename T>
     node<E>* first();
     node<E>* last();
-    void insert(E data);
-    void append(E data);
-    int deleteNode(E data);
-    void display();
+    void insert(E &data);
+    void append(E &data);
+    int deleteNode(E &data);
+    template<typename T>
+    friend std::ostream& operator<<(std::ostream &out, Linkedlist<T> &list);
 };
 
 template<class E>
@@ -42,7 +43,7 @@ node<E>* Linkedlist<E>::last() {
 }
 
 template <class E>
-void Linkedlist<E>::insert(E data) {
+void Linkedlist<E>::insert(E &data) {
     node<E>* temp = new node<E>;
     temp->data = data;
     temp->previous = nullptr;
@@ -59,7 +60,7 @@ void Linkedlist<E>::insert(E data) {
 }
 
 template<class E>
-void Linkedlist<E>::append(E data) {
+void Linkedlist<E>::append(E &data) {
     node<E>* temp = new node<E>;
     temp->data = data;
     temp->next = nullptr;
@@ -73,7 +74,7 @@ void Linkedlist<E>::append(E data) {
 }
 
 template<class E>
-int Linkedlist<E>::deleteNode(E data) {
+int Linkedlist<E>::deleteNode(E &data) {
     if (head == nullptr) {
         return -1;
     }
@@ -98,14 +99,14 @@ int Linkedlist<E>::deleteNode(E data) {
     }
 }
 
-template<class E>
-void Linkedlist<E>::display() {
-    node<E>* temp = head;
+template<typename T>
+std::ostream& operator<<(std::ostream &out, Linkedlist<T> &list) {
+    node<T>* temp = list.first();
     while (temp != nullptr) {
-        std::cout << temp->data << "  ";
+        out << temp->data << " ";
         temp = temp->next;
     }
-    std::cout << '\n';
+    return out;
 }
 
 #endif

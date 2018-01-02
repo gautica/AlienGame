@@ -20,6 +20,7 @@ private:
     Alien* aliens;
     Player player;
     Tile** map;
+
     Treasure treasure[2];
 public:
     Map(unsigned int width, unsigned int height, unsigned int count)
@@ -36,13 +37,18 @@ public:
                     map[y][x] = Wall();
                     isOccupied[y][x] = true;
                 } else {
-                    //map[y][x] = new Title;
                     isOccupied[y][x] = false;
                 }
             }
         }
         // creating aliens
         aliens = new Alien[COUNT];
+        // creating treasures
+        srand(time(0));
+        for (unsigned int i = 0; i < sizeof(treasure) / sizeof(Treasure); i++) {
+            int luckyNum = rand() % 3;
+            treasure[i].createItem(luckyNum);
+        }
         placeCharacter();
     }
 
@@ -78,7 +84,7 @@ private:
         // placing treasure
         for (unsigned int i = 0; i < sizeof(treasure) / sizeof(Treasure); i++) {
             generatePos(pos);
-            map[pos.getY()][pos.getX()] = treasure[i];
+            treasure[i].setPos(pos);
         }
 
     }
